@@ -1,7 +1,10 @@
 import React from "react";
+import Header from "../UI/Header";
 
 function RouteInfo() {
-  return <div>RouteInfo</div>;
+  return (
+    <Header/>
+  );
 }
 
 export default RouteInfo;
