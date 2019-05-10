@@ -24,3 +24,6 @@ yarn-error.log*
 
 # apikey
 src/apiKey.js
+
+# ide
+.idea/
