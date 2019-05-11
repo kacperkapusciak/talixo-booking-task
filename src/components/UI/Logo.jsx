@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./talixo_logo_2x.png";
+import logo from "../../img/talixo_logo_2x.png";
 
 export default () => (
   <Img src={logo} alt="talixo logo"/>

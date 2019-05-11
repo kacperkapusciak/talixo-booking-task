@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {accent, unactive} from "./colors";
+import {accent, unactive} from "../../utils/colors";
 
 function BookingSteps({active}) {
   const data = [{id: 1, name: "Where & When"},

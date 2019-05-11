@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../UI/Header";
 import BookingSteps from "../UI/BookingSteps";
 
-function RouteInfo() {
+function Booking() {
   return (
     <>
       <Header/>
@@ -11,4 +11,4 @@ function RouteInfo() {
   );
 }
 
-export default RouteInfo;
+export default Booking;

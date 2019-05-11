@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {primary} from "./colors";
-import {lg} from "./breakpoints";
+import {primary} from "../../utils/colors";
+import {lg} from "../../utils/breakpoints";
 import Logo from "./Logo";
 
 function Header() {

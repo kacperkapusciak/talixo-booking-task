@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # apikey
-src/apiKey.js
+src/utils/apiKey.js
 
 # ide
 .idea/
