@@ -11,8 +11,7 @@ function App() {
         <Route path="/when" component={RouteInfo} />
         <Route path="/what" component={Vehicles} />
         <Route path="/details-and-payment" component={Details} />
-        <Route path="/" exact component={RouteInfo} />
-        <Redirect to="/" />
+        <Redirect to="/when" />
       </Switch>
     </>
   );
