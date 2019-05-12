@@ -11,8 +11,8 @@ function BookingSteps({active}) {
       <StyledOl>
         {data.map((step) => (
           step.id === active
-            ? <StyledLi active>{step.name}</StyledLi>
-            : <StyledLi>{step.name}</StyledLi>
+            ? <StyledLi key={step.id} active>{step.name}</StyledLi>
+            : <StyledLi key={step.id}>{step.name}</StyledLi>
         ))}
       </StyledOl>
   );
