@@ -5,6 +5,8 @@ import axios from "axios";
 import apiKey from "../../utils/apiKey";
 import { md, lg } from "../../utils/breakpoints";
 import { accent} from "../../utils/colors";
+import Dropdown from "../UI/Dropdown";
+import MoreOptions from "./MoreOptions";
 
 const BookingForm = () => {
   const [pickup, setPickup] = useState("");
@@ -96,6 +98,8 @@ const BookingForm = () => {
           <Label htmlFor="destination">Voucher code (optional):</Label>
           <Input name="voucherCode" type="text" value={voucherCode} onChange={e => setVoucherCode(e.target.value)}/>
         </Flex>
+        <p>For 1-2 passengers with 1-2 bags</p>
+        <MoreOptions/>
         <Button type="submit">Start booking</Button>
       </Form>
 
@@ -108,6 +112,7 @@ const Form = styled.form`
   flex-direction: column;
   font-weight: 300;
   padding: 8px;
+  color: white;
   box-sizing: border-box;
   @media (min-width: ${md}) { 
     width: 708px;
@@ -165,41 +170,6 @@ const Input = styled.input`
   @media (min-width: ${md}) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-  }
-`;
-
-const Dropdown = styled.div`
-  box-sizing: border-box;
-  position: absolute;
-  display: ${props => props.show ? "inline-block" : "none"};
-  font-size: 19px;
-  overflow: auto;
-  height: 250px;
-  width: 378px;
-  border-radius: 3px;
-  top: 68px;
-  left: 1px;
-  z-index: 1;
-  
-  @media (min-width: ${md}) {
-    top: 48px;
-    left: 0px;
-  }
-  
-  span {
-    display: ${props => props.show ? "block" : "none"};
-    background: white;
-    padding: 8px 32px 8px 12px;;
-    border-bottom: 1px solid #ccc;
-    z-index: 1;
-    &:hover {
-      cursor: pointer;
-      background: #ccc;
-    }
-    &:last-child {
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
-    }
   }
 `;
 
