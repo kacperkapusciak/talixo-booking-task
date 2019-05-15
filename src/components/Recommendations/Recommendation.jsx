@@ -37,6 +37,7 @@ function Recommendation({offer}) {
 
 const Grid = styled.div`
   display: grid;
+  margin-bottom: 20px;
   @media (min-width: ${md}) {
     grid-template-columns: 275px 1fr 220px;
   }
@@ -90,6 +91,7 @@ const Button = styled(Link)`
   width: auto;
   &:hover {
     color: white;
+    background: #ff8500;
   }
 `;
 
@@ -117,6 +119,7 @@ const Title = styled.h3`
   line-height: 1;
   margin-bottom: 20px;
   padding: 0;
+  padding-top: 16px;
   @media (min-width: ${md}) {
     text-align: left;
   }
@@ -137,6 +140,8 @@ const List = styled.ul`
   padding: 0;
   border: 0;
   li {
+    font-weight: 200;
+    color: #1e2731;
     margin-bottom: 8px;
   }
 `;
