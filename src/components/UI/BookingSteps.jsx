@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import {accent, unactive} from "../../utils/colors";
-import {sm} from "../../utils/breakpoints";
+import { accent, unactive } from "../../utils/colors";
+import { sm } from "../../utils/breakpoints";
 
-function BookingSteps({active}) {
+function BookingSteps({active, color, bg}) {
   const data = [{id: 1, name: "Where & When"},
-                {id: 2, name: "Choose a Car"},
-                {id: 3, name: "Details & Payment"}];
+    {id: 2, name: "Choose a Car"},
+    {id: 3, name: "Details & Payment"}];
   return (
-      <StyledOl>
-        {data.map((step) => (
-          step.id === active
-            ? <StyledLi key={step.id} active>{step.name}</StyledLi>
-            : <StyledLi key={step.id}>{step.name}</StyledLi>
-        ))}
-      </StyledOl>
+    <StyledOl color={color} background={bg}>
+      {data.map((step) => (
+        step.id === active
+          ? <StyledLi key={step.id} active background={bg}>{step.name}</StyledLi>
+          : <StyledLi key={step.id}>{step.name}</StyledLi>
+      ))}
+    </StyledOl>
   );
 }
 
@@ -25,7 +25,8 @@ const StyledOl = styled.ol`
   align-items: center;
   margin-top: 0;
   padding-top: 20px;
-  color: white;
+  color: ${props => props.color};
+  background: ${props => props.background};
   list-style: none;
   counter-reset: num;
   @media (min-width: ${sm}) {
@@ -47,7 +48,7 @@ const StyledLi = styled.li`
     content: counter(num);
     font-weight: bold;
     font-size: 20px;
-    color: ${props => props.active ? "white" : unactive};
+    color: ${props => props.active ? (props.background === "white" ? accent : "white") : unactive};
     text-align: center;
     position: absolute;
     left: -35px;

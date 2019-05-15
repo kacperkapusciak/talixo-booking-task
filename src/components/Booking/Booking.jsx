@@ -13,7 +13,7 @@ function Booking() {
     <>
       <Header/>
       <Container bg={primary}>
-        <BookingSteps active={1}/>
+        <BookingSteps active={1} color={"white"} bg={primary}/>
         <Grid>
           <BookingForm/>
           <BookingSummary/>
