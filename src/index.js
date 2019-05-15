@@ -8,7 +8,7 @@ import Root from "./store/Root";
 
 const app = (
   <Root>
-    <BrowserRouter basename="/booking">
+    <BrowserRouter basename="/talixo-booking-task/booking">
       <App/>
     </BrowserRouter>
   </Root>
