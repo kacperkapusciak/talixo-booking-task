@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Economy+",
+    "exampleCars": [
+      "Toyota Prius",
+      "Audi A4"
+    ],
+    "features": [
+      "Meet & Greet",
+      "45 minutes waiting time",
+      "Accounts for flight delays",
+      "Fixed price - no traffic charges"
+    ],
+    "picture": "https://static.talixo.de/images/vehicles/economy.png"
+  },
+  {
+    "title": "Economy VAN",
+    "exampleCars": [
+      "Mercedes Vito",
+      "VW T5"
+    ],
+    "features": [
+      "Meet & Greet",
+      "45 minutes waiting time",
+      "Accounts for flight delays",
+      "Fixed price - no traffic charges"
+    ],
+    "picture": "https://static.talixo.de/images/vehicles/economy_van.png"
+  },
+  {
+    "title": "Business Sedan",
+    "exampleCars": [
+      "Mercedes E-Class",
+      "Audi A6",
+      "BMW 5"
+    ],
+    "features": [
+      "Meet & Greet",
+      "45 minutes waiting time",
+      "Accounts for flight delays",
+      "Fixed price - no traffic charges"
+    ],
+    "picture": "https://static.talixo.de/images/vehicles/business.png"
+  },
+  {
+    "title": "Business VAN",
+    "exampleCars": [
+      "Mercedes Viano",
+      "Mercedes V-Class"
+    ],
+    "features": [
+      "Black business limousine",
+      "Meet & Greet",
+      "60 minutes waiting time",
+      "Fixed price - no traffic charges"
+    ],
+    "picture": "https://static.talixo.de/images/vehicles/business_van.png"
+  },
+  {
+    "title": "First Class",
+    "exampleCars": [
+      "Mercedes S-Class",
+      "Audi A8",
+      "BMW 7"
+    ],
+    "features": [
+      "Black luxury limousine",
+      "Meet & Greet",
+      "90 minutes waiting time",
+      "Bottled water"
+    ],
+    "picture": "https://static.talixo.de/images/vehicles/first.png"
+  }
+]
