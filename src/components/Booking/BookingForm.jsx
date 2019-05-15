@@ -1,23 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import Yup from "yup";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import apiKey from "../../utils/apiKey";
 import { md, lg } from "../../utils/breakpoints";
-import { accent, blackFont } from "../../utils/colors";
+import { accent, blackFont, unactive, background } from "../../utils/colors";
 import Dropdown from "../UI/Dropdown";
 import MoreOptions from "./MoreOptions";
+import * as actions from "../../store/actions";
 
-function BookingForm() {
-  const [pickup, setPickup] = useState("");
-  const [destination, setDestination] = useState("");
-  const [voucherCode, setVoucherCode] = useState("");
+function BookingForm(props) {
+  const retrievePickup = props.pickupStored ? props.pickupStored.description : "";
+  const retrieveDestination = props.destinationStored ? props.destinationStored.description : "";
+  const retrieveVoucherCode = props.voucherCodeStored || "";
 
-  const [pickupChosen, setPickupChosen] = useState({});
-  const [displayPickupDropdown, setPickupDropdown] = useState(false);
+  const [pickup, setPickup] = useState(retrievePickup);
+  const [destination, setDestination] = useState(retrieveDestination);
+  const [voucherCode, setVoucherCode] = useState(retrieveVoucherCode);
+
   const [places, setPlaces] = useState([]);
 
-  const [destinationChosen, setDestinationChosen] = useState({});
+  const [pickupChosen, setPickupChosen] = useState(retrievePickup);
+  const [destinationChosen, setDestinationChosen] = useState(retrieveDestination);
+
+  const [displayPickupDropdown, setPickupDropdown] = useState(false);
   const [displayDestinationDropdown, setDestinationDropdown] = useState(false);
 
 
@@ -30,14 +37,6 @@ function BookingForm() {
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log({
-      pickup: pickupChosen,
-      destination: destinationChosen,
-      voucherCode: voucherCode
-    })
-  }
 
   function handlePickupChange(event) {
     setPickup(event.target.value);
@@ -50,10 +49,11 @@ function BookingForm() {
   }
 
   function handlePickupClick(value) {
-    setPickupChosen(value);
     setPickup(value.description);
     setPickupDropdown(false);
     setPlaces([]);
+    setPickupChosen(value.description);
+    props.onSetPickup(value);
   }
 
   function handleDestinationChange(event) {
@@ -67,15 +67,17 @@ function BookingForm() {
   }
 
   function handleDestinationClick(value) {
-    setDestinationChosen(value);
     setDestination(value.description);
     setDestinationDropdown(false);
     setPlaces([]);
+    setDestinationChosen(value.description);
+    props.onSetDestination(value);
   }
+
 
   return (
     <>
-      <Form onSubmit={event => handleSubmit(event)}>
+      <Form>
         <Flex>
           <Dropdown show={displayPickupDropdown}>
             {places ? places.map((el, index) => <span key={`pickup-${index}`}
@@ -96,11 +98,13 @@ function BookingForm() {
         </Flex>
         <Flex>
           <Label htmlFor="destination">Voucher code (optional):</Label>
-          <Input name="voucherCode" type="text" value={voucherCode} onChange={e => setVoucherCode(e.target.value)}/>
+          <Input name="voucherCode" type="text" value={voucherCode} autoComplete="off"
+                 onChange={e => setVoucherCode(e.target.value)}/>
         </Flex>
-        <p>For 1-2 passengers with 1-2 bags</p>
+        <p style={{padding: "10px 0", fontSize: "16px"}}>For 1-2 passengers with 1-2 bags</p>
         <MoreOptions/>
-        <Button type="submit">Start booking</Button>
+        <Button to="/what" onClick={() => props.onSetVoucherCode(voucherCode)}
+                disabled={!(pickupChosen && destinationChosen)}>Start booking</Button>
       </Form>
 
     </>
@@ -173,29 +177,52 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
-    box-sizing: border-box;
-    background-color: ${accent};
-    border: 4px;
-    border-radius: 3px;
+const Button = styled(Link)`
+  box-sizing: border-box;
+  background-color: ${accent};
+  border: 4px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  margin: 0;
+  text-align: center;
+  line-height: 30px;
+  padding: 12px 20px;
+  font-size: 26px;
+  font-weight: 400;
+  
+  @media (min-width: ${md}) {
+    width: 320px;
+    height: 60px;
+    float: left;
+  }
+  
+  @media (min-width: ${lg}) {
+    width: 100%;
+  }
+  
+  &:hover {
     color: white;
-    cursor: pointer;
-    margin: 0;
-    text-align: center;
-    float: right;
-    padding: 12px 20px;
-    font-size: 26px;
-    font-weight: 400;
-    
-    @media (min-width: ${md}) {
-      width: 320px;
-      height: 60px;
-      float: left;
-    }
-    
-    @media (min-width: ${lg}) {
-      width: 100%;
-    }
+  }
+  
+  &[disabled] {
+    cursor: disabled; 
+    pointer-events: none;
+    color: ${unactive};
+    background: ${background};
+  }
 `;
 
-export default BookingForm;
+const mapStateToProps = state => ({
+  pickupStored: state.route.pickup,
+  destinationStored: state.route.destination,
+  voucherCodeStored: state.route.voucherCode
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSetPickup: (value) => dispatch(actions.setPickup(value)),
+  onSetDestination: (value) => dispatch(actions.setDestination(value)),
+  onSetVoucherCode: (value) => dispatch(actions.setVoucherCode(value))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);

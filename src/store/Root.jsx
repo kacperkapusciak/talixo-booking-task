@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
 import reducers from "./reducers";
 
+
 function Root({children, initialState = {}}) {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

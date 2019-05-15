@@ -25,7 +25,7 @@ const Dropdown = styled.div`
     display: ${props => props.show ? "block" : "none"};
     background: white;
     padding: ${props => props.small ? "8px 12px" : "8px 32px 8px 12px"};
-    min-height: 48px;
+    line-height: 30px;
     border-bottom: 1px solid #ccc;
     z-index: 2;
     &:hover {

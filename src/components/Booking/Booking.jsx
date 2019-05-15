@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../UI/Header";
 import BookingSteps from "../UI/BookingSteps";
 import BookingForm from "./BookingForm";
-import YourBooking from "./YourBooking";
+import BookingSummary from "./BookingSummary";
 import Container from "../UI/Containter";
 import { primary } from "../../utils/colors";
 import {lg} from "../../utils/breakpoints";
@@ -16,7 +16,7 @@ function Booking() {
         <BookingSteps active={1}/>
         <Grid>
           <BookingForm/>
-          <YourBooking/>
+          <BookingSummary/>
         </Grid>
       </Container>
     </>

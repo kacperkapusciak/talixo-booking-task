@@ -1,17 +1,22 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
+import * as actions from "../../store/actions";
 import Dropdown from "../UI/Dropdown";
 import { blackFont, iconBackground } from "../../utils/colors";
 
-function Select({id, range, defaultValue, hint, icon}) {
+function Select({id, range, defaultValue, hint, icon, onOptionUpdate}) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isHintOpen, setHintOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue || 0);
+  const [value, setValue] = useState(defaultValue);
+
 
   function handleOptionClick(num) {
     setDropdownOpen(false);
     setValue(num);
+    onOptionUpdate(id, num);
   }
 
   return (
@@ -36,7 +41,7 @@ function Select({id, range, defaultValue, hint, icon}) {
 Select.propTypes = {
   id: PropTypes.string.isRequired,
   range: PropTypes.arrayOf(PropTypes.number).isRequired,
-  defaultValue: PropTypes.number,
+  defaultValue: PropTypes.number.isRequired,
   icon: PropTypes.string.isRequired,
   hint: PropTypes.string.isRequired
 };
@@ -108,4 +113,8 @@ const Arrow = styled.div`
   }
 `;
 
-export default Select;
+const mapDispatchToProps = dispatch => ({
+  onOptionUpdate: (id, value) => dispatch(actions.optionUpdate(id, value))
+});
+
+export default connect(null, mapDispatchToProps)(Select);
