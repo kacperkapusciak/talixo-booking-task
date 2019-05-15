@@ -1,19 +1,30 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
+import { blackFont, iconBackground } from "../../utils/colors";
 
 function Select({id, range, defaultValue, hint, icon}) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isHintOpen, setHintOpen] = useState(false);
+  const [value, setValue] = useState(defaultValue || 0);
+
+  function handleOptionClick(num) {
+    setDropdownOpen(false);
+    setValue(num);
+  }
 
   return (
     <Wrapper>
       <Dropdown show={isDropdownOpen} small center>
-        {range.map(num => <span key={id + num}>{num}</span>)}
+        {range.map(num => <span key={id + num} onClick={() => handleOptionClick(num)}>{num}</span>)}
       </Dropdown>
-      <Label icon={icon} />
+      <Hint show={isHintOpen}>
+        {hint}
+      </Hint>
+      <Label icon={icon} onMouseEnter={() => setHintOpen(true)} onMouseLeave={() => setHintOpen(false)}/>
       <StyledSelect onClick={() => setDropdownOpen(!isDropdownOpen)}>
-        {defaultValue ? defaultValue : 0}
+        {value}
       </StyledSelect>
       <Arrow onClick={() => setDropdownOpen(!isDropdownOpen)} isOpen={isDropdownOpen}>
         <b>&#8250;</b>
@@ -25,6 +36,7 @@ function Select({id, range, defaultValue, hint, icon}) {
 Select.propTypes = {
   id: PropTypes.string.isRequired,
   range: PropTypes.arrayOf(PropTypes.number).isRequired,
+  defaultValue: PropTypes.number,
   icon: PropTypes.string.isRequired,
   hint: PropTypes.string.isRequired
 };
@@ -33,11 +45,12 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 48px auto 48px;
   margin: 2px;
+  box-sizing: border-box;
   position: relative;
 `;
 
 const Label = styled.label`
-  background: #ebeced url(${props => props.icon}) no-repeat center center;
+  background: ${iconBackground} url(${props => props.icon}) no-repeat center center;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   display: inline-block;
@@ -45,9 +58,22 @@ const Label = styled.label`
   z-index: 1;
 `;
 
+const Hint = styled.div`
+  position: absolute;
+  display: ${props => props.show ? "block" : "none"};
+  width: 157px;
+  font-size: 12px;
+  border-radius: 3px;
+  background: ${iconBackground};
+  box-shadow: 0 0 10px;
+  padding: 14px 8px;
+  bottom: 50px;
+  z-index: 2;
+`;
+
 const StyledSelect = styled.span`
   border-right: 1px solid #ccc;
-  color: #4c4c4c;
+  color: ${blackFont};
   background: white;
   font-size: 19px;
   text-align: center;

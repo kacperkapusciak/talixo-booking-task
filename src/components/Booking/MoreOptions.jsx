@@ -48,6 +48,7 @@ function MoreOptions() {
 const Wrapper = styled.div`
   display: grid;
   color: black;
+  box-sizing: border-box;
   grid-template-columns: 1fr 1fr;
   @media (min-width: ${xsm}) {
     grid-template-columns: 1fr 1fr 1fr;

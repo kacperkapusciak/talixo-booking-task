@@ -4,11 +4,11 @@ import styled from "styled-components";
 import axios from "axios";
 import apiKey from "../../utils/apiKey";
 import { md, lg } from "../../utils/breakpoints";
-import { accent} from "../../utils/colors";
+import { accent, blackFont } from "../../utils/colors";
 import Dropdown from "../UI/Dropdown";
 import MoreOptions from "./MoreOptions";
 
-const BookingForm = () => {
+function BookingForm() {
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [voucherCode, setVoucherCode] = useState("");
@@ -154,7 +154,7 @@ const Input = styled.input`
   -webkit-appearance: none;
   border: none;
   border-radius: 3px;
-  color: #4c4c4c;
+  color: ${blackFont};
   font-size: 19px;
   height: 48px;
   margin: 0;
